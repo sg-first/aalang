@@ -1,0 +1,21 @@
+import console
+import aacs
+import io
+
+var myaacs=aacs.aacs()
+myaacs.setSource("D:/main.js")
+myaacs.inCompile()
+var cSharpObject=myaacs.getObject("AAuLibrary","CSharpObject")  
+//myaacs.outCompile()
+
+//调用实时编译的C#函数
+var ret = cSharpObject.Hello(
+		//通过数组传递object
+		{
+    		属性名 = 123;
+    		执行aardio = function( code )
+    		{loadcode(code)();}
+		}
+	);
+
+console.pause()

@@ -1,0 +1,57 @@
+﻿namespace aacs
+{
+
+import fsys.file
+import dotNet
+
+var clr,err = dotNet.clr( "v4.0","v2.0" ); 
+if(!clr) 
+{
+    error("当前系统未安装.Net Framework 2.0 以上版本")
+    return
+}
+
+class aacs
+{
+	ctor(lang="C#")
+	{
+		//创建C#编译器
+		var appDomain = clr.createAppDomain();
+		this.compiler = appDomain.createCompiler(lang);
+		this.compiler.Reference("System.dll")
+	};
+	
+	//compiler=null;
+	assembly=null;
+	
+	setSource=function(fileName)
+	{
+		var myfile=..fsys.file(fileName)
+		if(myfile==null)
+		{
+			error("未找到入口文件")
+			return null
+		}
+		var contect=myfile.readAll()
+		this.compiler.Source = contect
+	};
+	inCompile=function(fileName)
+	{
+		this.compiler.getParameters().getGenerateInMemory()
+		this.assembly=this.compiler.Compile()
+	};
+	getObject=function(namespaceName,className) //调用程序集创建类对象
+	{
+		return this.assembly.createInstance(namespaceName+"."+className)
+	};
+	outCompile=function(path)
+	{
+		this.compiler.getParameters().setOutputAssembly(path)
+		this.compiler.getParameters().setGenerateExecutable(true)
+		this.compiler.getParameters().setGenerateInMemory(false)
+		this.assembly=this.compiler.Compile()
+	};
+}
+
+	
+}
