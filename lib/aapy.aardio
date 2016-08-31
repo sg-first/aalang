@@ -42,6 +42,7 @@ class aapy
 		
 		if(!..py3.exec(newcode))
 		{error("程序有错误，运行失败")}
+		//注意，没有返回值。以后有办法再加吧
 	};
 }
 

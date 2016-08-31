@@ -3,12 +3,19 @@
 
 import dotNet
 import help
+import table
 
 var clr,err = dotNet.clr( "v4.0","v2.0" ); 
 if(!clr) 
 {
     error("当前系统未安装.Net Framework 2.0 以上版本")
     return
+}
+
+function addAArdioInterface(par)
+{
+	var addtable={callAArdio = function(code){loadcode(code)();}}
+	return table.concat(par,addtable)
 }
 
 class aacs
@@ -33,13 +40,23 @@ class aacs
 	{
 		return this.assembly.createInstance(namespaceName+"."+className)
 	};
-	/*outCompile=function(path)
+	//从aauto中调用，参数和返回值仅支持void和object
+	callFun=function(namespaceName,className,funName,parObject=false)
 	{
-		this.compiler.getParameters().setGenerateExecutable(true)
-		this.compiler.getParameters().setGenerateInMemory(false)
-		this.compiler.getParameters().setOutputAssembly(path)
-		this.assembly=this.compiler.Compile()
-	};*/
+		if(parObject==false)
+		{
+			return this.assembly.invokeStaticMember(namespaceName+"."+className,funName)
+		}
+		return this.assembly.invokeStaticMember(namespaceName+"."+className,funName,parObject)
+	}
+	callObjectFun=function(object,func,parObject=false)
+	{
+		if(parObject==false)
+		{
+			return appDomain.invokeInstanceMember(object,func)
+		}
+		return appDomain.invokeInstanceMember(object,func,parObject)
+	}
 }
 
 	

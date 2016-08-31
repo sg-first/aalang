@@ -1,17 +1,18 @@
-using System.Reflection; 
+using System.Reflection;
+using System;
 
 namespace AAuLibrary  
 { 
-    public class AardioTable  
+    public class AArdioTable  
     { 
     	private object tObject;
-    	public AardioTable(object obj) 
+    	public AArdioTable(object obj) 
 		{
     		tObject = obj;
     	}
     	public object GetProperty(string k) 
 		{
-    		return tObject.GetType().InvokeMember("属性名", BindingFlags.GetProperty, null, tObject, null);
+    		return tObject.GetType().InvokeMember(k, BindingFlags.GetProperty, null, tObject, null);
     	}
     	public void SetProperty(string k,object v) 
 		{
@@ -25,13 +26,23 @@ namespace AAuLibrary
     
     public class CSharpObject
     { 
-        public object Hello(object comObject) //通过object和aauto通讯
+        public object Hello(object comObject) //将object塞给AArdioTable和aauto通讯
 		{   
-            AardioTable tab = new AardioTable(comObject);
-         
-        	tab.SetProperty("属性名",456); 
-            tab.InvokeMember("执行aardio","console.log('在C#中执行aardio代码')");
-            return tab.GetProperty("属性名"); 
+            AArdioTable tab = new AArdioTable(comObject); //和获得参数值有关
+        	tab.SetProperty("retval",456);
+            tab.InvokeMember("callAArdio","console.log('在C#中执行aardio代码')");
+			Console.WriteLine("Hello world");
+            return tab.GetProperty("retval");
         }
+		
+		static public void helloworld()
+		{
+			Console.WriteLine("Hello world");
+		}
     }   
-} 
+}
+
+namespace MainSpace
+{
+	
+}
