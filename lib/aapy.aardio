@@ -40,9 +40,6 @@ class aapy
 		var code=func+"("+relstr+")" //注意原来的代码给留一个结尾换行
 		var newcode=this.source+code
 		
-		import console
-		console.log(newcode)
-		
 		if(!..py3.exec(newcode))
 		{error("程序有错误，运行失败")}
 	};
