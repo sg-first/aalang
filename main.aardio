@@ -8,7 +8,6 @@ import aapy
 var myaacs=aacs.aacs()
 myaacs.inCompile(io.fullpath("main.cs"))
 myaacs.run()
-//myaacs.callFun("AAuLibrary","CSharpObject","helloworld")
 var cSharpObject=myaacs.getObject("AAuLibrary","CSharpObject")  
 var ret=myaacs.callObjectFun(cSharpObject,"Hello",
 		aacs.addAArdioInterface(
@@ -21,7 +20,6 @@ console.log(ret)
 	
 //py部分
 var myaapy=aapy.aapy()
-//myaapy.directlyRun(io.fullpath("main.py"))
 myaapy.inCompile(io.fullpath("main.py"))
 myaapy.run()
 myaapy.callFun("myfun")
