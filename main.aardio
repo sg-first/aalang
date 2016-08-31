@@ -1,13 +1,13 @@
 import console
-import aacs
+console.open()
 import io
+import aacs
+import aapy
 
+//C#部分
 var myaacs=aacs.aacs()
-myaacs.setSource("D:/main.js")
-myaacs.inCompile()
+myaacs.inCompile(io.fullpath("main.cs"))
 var cSharpObject=myaacs.getObject("AAuLibrary","CSharpObject")  
-//myaacs.outCompile()
-
 //调用实时编译的C#函数
 var ret = cSharpObject.Hello(
 		//通过数组传递object
@@ -17,5 +17,12 @@ var ret = cSharpObject.Hello(
     		{loadcode(code)();}
 		}
 	);
+	
+//py部分
+var myaapy=aapy.aapy()
+//myaapy.directlyRun(io.fullpath("main.py"))
+myaapy.inCompile(io.fullpath("main.py"))
+//myaapy.run()
+myaapy.callFun("myfun")
 
 console.pause()
