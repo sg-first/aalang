@@ -7,8 +7,8 @@ import aapy
 //C#部分
 var myaacs=aacs.aacs()
 myaacs.inCompile(io.fullpath("main.cs"))
-myaacs.callFun("AAuLibrary","CSharpObject","helloworld")
-
+myaacs.run()
+//myaacs.callFun("AAuLibrary","CSharpObject","helloworld")
 var cSharpObject=myaacs.getObject("AAuLibrary","CSharpObject")  
 var ret=myaacs.callObjectFun(cSharpObject,"Hello",
 		aacs.addAArdioInterface(

@@ -41,23 +41,28 @@ class aacs
 		return this.assembly.createInstance(namespaceName+"."+className)
 	};
 	//从aauto中调用，参数和返回值仅支持void和object
-	callFun=function(namespaceName,className,funName,parObject=false)
+	callFun=function(namespaceName,className,funName,parObject)
 	{
-		if(parObject==false)
+		if(parObject==null)
 		{
 			return this.assembly.invokeStaticMember(namespaceName+"."+className,funName)
 		}
 		return this.assembly.invokeStaticMember(namespaceName+"."+className,funName,parObject)
-	}
-	callObjectFun=function(object,func,parObject=false)
+	};
+	callObjectFun=function(object,func,parObject)
 	{
-		if(parObject==false)
+		if(parObject==null)
 		{
 			return appDomain.invokeInstanceMember(object,func)
 		}
 		return appDomain.invokeInstanceMember(object,func,parObject)
+	};
+	run=function()
+	{
+		this.callFun("MainSpace","Program","Main")
 	}
+	
 }
 
-	
+
 }

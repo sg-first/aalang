@@ -34,15 +34,16 @@ namespace AAuLibrary
 			Console.WriteLine("Hello world");
             return tab.GetProperty("retval");
         }
-		
-		static public void helloworld()
-		{
-			Console.WriteLine("Hello world");
-		}
     }   
 }
 
 namespace MainSpace
 {
-	
+	class Program
+	{
+		static public void Main() //默认入口函数
+		{
+			Console.WriteLine("Hello world");
+		}
+	}
 }
